@@ -30,12 +30,16 @@ class ArticlesController < ApplicationController
       flash[:notice] = "Article was updated successfully."
       redirect_to @article
     else
-      render 'update'
+      render 'edit'
     end
   end
 
   def destroy
-    flash[notice] = "Article was deleted successfully."
+    if @article.destroy
+      flash[notice] = "Article was deleted successfully."
+    else
+      flash[notice] = "Failed to delete the article."
+    end
     redirect_to articles_path
   end
 
